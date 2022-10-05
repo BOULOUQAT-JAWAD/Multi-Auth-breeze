@@ -22,15 +22,20 @@ Route::get('/', function () {
  * Admin routes
  */
 Route::prefix('admin')->group(function(){
-    Route::get('/login',[AdminController::class,'loginform'])
-        ->name('admin.loginform');
+
     Route::post('/login',[AdminController::class,'login'])
         ->name('admin.login');
+
     Route::group(['middleware' => 'admin'], function () {
+        Route::get('/login',[AdminController::class,'loginform'])
+            ->name('admin.loginform');
+
         Route::get('/dashboard', [AdminController::class, 'dashboard'])
             ->name('admin.dashboard');
+
         Route::post('/logout',[AdminController::class, 'logout'])
             ->name('admin.logout');
+
     });
 });
 
