@@ -26,9 +26,12 @@ Route::prefix('admin')->group(function(){
         ->name('admin.loginform');
     Route::post('/login',[AdminController::class,'login'])
         ->name('admin.login');
-    Route::get('/dashboard',[AdminController::class,'dashboard'])
-        ->name('admin.dashboard')
-        ->middleware('admin');
+    Route::group(['middleware' => 'admin'], function () {
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])
+            ->name('admin.dashboard');
+        Route::post('/logout',[AdminController::class, 'logout'])
+            ->name('admin.logout');
+    });
 });
 
 

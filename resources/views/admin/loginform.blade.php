@@ -12,6 +12,13 @@
         <form method="POST" action="{{ route('admin.login') }}">
             @csrf
 
+            <center>
+                @if(\Illuminate\Support\Facades\Session::has('error'))
+                    {{\Illuminate\Support\Facades\Session::get('error')}}
+                @elseif(\Illuminate\Support\Facades\Session::has('success'))
+                    {{\Illuminate\Support\Facades\Session::get('success')}}
+                @endif
+            </center>
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
